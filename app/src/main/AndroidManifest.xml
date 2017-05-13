@@ -19,7 +19,6 @@
         <activity android:name=".Secante" />
         <activity android:name=".Bairstow" />
         <activity android:name=".Biseccion" />
-        <activity android:name=".GaussSeidel" />
         <activity android:name=".InterpolacionNewton" />
         <activity android:name=".Cramer"></activity>
     </application>

@@ -47,7 +47,7 @@
         android:text="Calcular" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/resultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/btnCalcularBairstow"
