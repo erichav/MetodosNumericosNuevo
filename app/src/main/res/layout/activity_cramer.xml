@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sechf.metodosnumericos.Cramer">
+
+    <EditText
+        android:id="@+id/valores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="83dp"
+        android:ems="10"
+        android:hint="Valores"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/btnAgregarValores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/valores"
+        android:text="Agregar\nvalores" />
+
+    <Button
+        android:id="@+id/btnBorrarValores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/puntos"
+        android:layout_toRightOf="@+id/btnAgregarValores"
+        android:text="Borrar \nvalores anteriores" />
+
+    <Button
+        android:id="@+id/btnCalcularCramer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/puntos"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/btnBorrarValores"
+        android:text="Calcular" />
+
+    <TextView
+        android:id="@+id/puntos"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnAgregarValores"
+        android:layout_marginTop="13dp"
+        android:text="Valores"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/resultados"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:text="Resultados"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textSize="18sp"
+        android:layout_below="@+id/puntos"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+</RelativeLayout>

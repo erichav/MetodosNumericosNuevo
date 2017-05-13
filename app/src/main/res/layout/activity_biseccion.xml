@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sechf.metodosnumericos.Biseccion">
+
+    <EditText
+        android:id="@+id/funcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="63dp"
+        android:ems="10"
+        android:hint="Función"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ptoInicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/funcion"
+        android:ems="10"
+        android:hint="Punto Inicial"
+        android:inputType="numberSigned|numberDecimal" />
+
+    <EditText
+        android:id="@+id/ptoFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ptoInicial"
+        android:layout_toEndOf="@+id/ptoInicial"
+        android:layout_toRightOf="@+id/ptoInicial"
+        android:ems="10"
+        android:hint="Punto Final"
+        android:inputType="numberSigned|numberDecimal" />
+
+    <EditText
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/ptoInicial"
+        android:layout_marginTop="11dp"
+        android:ems="10"
+        android:hint="Error (%)"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/btnCalcularBiseccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/error"
+        android:layout_toRightOf="@+id/error"
+        android:text="Calcular" />
+
+    <TextView
+        android:id="@+id/resultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnCalcularBiseccion"
+        android:layout_marginTop="17dp"
+        android:textSize="20sp" />
+
+</RelativeLayout>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="sechf.metodosnumericos.Bairstow">
+
+    <TextView
+        android:id="@+id/textoBairstow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="100dp"
+        android:text="Coeficientes del polinomio"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.SearchResult.Title"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/coeficientes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/textoBairstow"
+        android:layout_alignLeft="@+id/textoBairstow"
+        android:layout_alignRight="@+id/textoBairstow"
+        android:layout_alignStart="@+id/textoBairstow"
+        android:layout_below="@+id/textoBairstow"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Coeficientes"
+        android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+    <Button
+        android:id="@+id/btnCalcularBairstow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/coeficientes"
+        android:layout_alignLeft="@+id/coeficientes"
+        android:layout_alignRight="@+id/coeficientes"
+        android:layout_alignStart="@+id/coeficientes"
+        android:layout_below="@+id/coeficientes"
+        android:layout_marginTop="18dp"
+        android:text="Calcular" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnCalcularBairstow"
+        android:layout_alignLeft="@+id/btnCalcularBairstow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/btnCalcularBairstow"
+        android:layout_alignStart="@+id/btnCalcularBairstow"
+        android:layout_below="@+id/btnCalcularBairstow"
+        android:layout_marginTop="23dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textSize="18sp" />
+
+</RelativeLayout>
