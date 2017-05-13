@@ -6,4 +6,76 @@
     android:layout_height="match_parent"
     tools:context="sechf.metodosnumericos.Secante">
 
+    <EditText
+        android:id="@+id/funcion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="63dp"
+        android:ems="10"
+        android:hint="Función"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/ptoInicial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Punto Inicial"
+        android:inputType="numberSigned|numberDecimal"
+        android:layout_below="@+id/funcion"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:id="@+id/ptoFinal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/ptoInicial"
+        android:layout_alignBottom="@+id/ptoInicial"
+        android:layout_toEndOf="@+id/error"
+        android:layout_toRightOf="@+id/error"
+        android:ems="10"
+        android:hint="Punto Final"
+        android:inputType="numberSigned|numberDecimal" />
+
+    <EditText
+        android:id="@+id/error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Error (%)"
+        android:inputType="numberDecimal"
+        android:layout_below="@+id/ptoInicial"
+        android:layout_alignRight="@+id/ptoInicial"
+        android:layout_alignEnd="@+id/ptoInicial"
+        android:layout_marginRight="11dp"
+        android:layout_marginEnd="11dp"
+        android:layout_marginTop="11dp" />
+
+    <Button
+        android:id="@+id/btnCalcularSecante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Calcular"
+        android:layout_alignBaseline="@+id/error"
+        android:layout_alignBottom="@+id/error"
+        android:layout_toRightOf="@+id/ptoInicial"
+        android:layout_toEndOf="@+id/ptoInicial" />
+
+    <TextView
+        android:id="@+id/resultados"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/btnCalcularSecante"
+        android:textSize="20sp" />
 </RelativeLayout>

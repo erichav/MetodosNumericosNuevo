@@ -2,15 +2,40 @@ package sechf.metodosnumericos;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import net.objecthunter.exp4j.*;
 
 public class Secante extends AppCompatActivity {
+    private Button btnCalcular;
+    private EditText funcion;
+    private EditText puntoInicial;
+    private EditText puntoFinal;
+    private EditText error;
+    private TextView resultados;
+    private Toast toast;
+
+    public Secante() {
+        // Required empty public constructor
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_secante);
-        secante("sin(x)", 3, 4, 0.00001);
+        btnCalcular = (Button) findViewById(R.id.btnCalcularBiseccion);
+        funcion = (EditText) findViewById(R.id.funcion);
+        puntoInicial = (EditText) findViewById(R.id.ptoInicial);
+        puntoFinal = (EditText) findViewById(R.id.ptoFinal);
+        error = (EditText) findViewById(R.id.error);
+        resultados = (TextView) findViewById(R.id.resultados);
+        btnCalcular.setText(secante("sin(x)", 3, 4, 0.00001));
+
     }
 
     public static void secante(String func, double iniVal, double finVal, double tol){

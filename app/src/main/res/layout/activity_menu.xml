@@ -6,4 +6,71 @@
     android:layout_height="match_parent"
     tools:context="sechf.metodosnumericos.Menu">
 
+    <Button
+        android:id="@+id/btnBairstow"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="107dp"
+        android:layout_toStartOf="@+id/btnBiseccion"
+        android:text="Bairstow" />
+
+    <Button
+        android:id="@+id/btnBiseccion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bisección"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp"
+        android:layout_alignBaseline="@+id/btnBairstow"
+        android:layout_alignBottom="@+id/btnBairstow"
+        android:layout_toLeftOf="@+id/btnCramer"
+        android:layout_toStartOf="@+id/btnCramer" />
+
+    <Button
+        android:id="@+id/btnCramer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btnBiseccion"
+        android:layout_marginEnd="12dp"
+        android:layout_marginRight="12dp"
+        android:text="Cramer" />
+
+    <Button
+        android:id="@+id/btnInterpol"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnBairstow"
+        android:layout_alignStart="@+id/btnBairstow"
+        android:layout_below="@+id/btnBairstow"
+        android:layout_marginTop="55dp"
+        android:text="Interpolación\nNewton"
+        android:layout_toLeftOf="@+id/btnSecante"
+        android:layout_toStartOf="@+id/btnSecante" />
+
+    <Button
+        android:id="@+id/btnSecante"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnBiseccion"
+        android:layout_alignStart="@+id/btnBiseccion"
+        android:layout_alignTop="@+id/btnInterpol"
+        android:text="Secante" />
+
+    <Button
+        android:id="@+id/btnGaussJordan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnCramer"
+        android:layout_alignRight="@+id/btnCramer"
+        android:layout_alignTop="@+id/btnSecante"
+        android:text="Gauss\nJordan"
+        android:layout_toRightOf="@+id/btnBiseccion"
+        android:layout_toEndOf="@+id/btnBiseccion" />
 </RelativeLayout>

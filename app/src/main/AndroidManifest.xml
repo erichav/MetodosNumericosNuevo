@@ -20,7 +20,8 @@
         <activity android:name=".Bairstow" />
         <activity android:name=".Biseccion" />
         <activity android:name=".InterpolacionNewton" />
-        <activity android:name=".Cramer"></activity>
+        <activity android:name=".Cramer" />
+        <activity android:name=".GaussJordan"></activity>
     </application>
 
 </manifest>
