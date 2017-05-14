@@ -1,24 +1,29 @@
 package sechf.metodosnumericos;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Bairstow extends Activity{
 
-    private Button calcular;
+    private Button btnCalcularBairstow;
     private EditText valores;
     private TextView resultados;
-    private ArrayList<Double> coeficientes;
-    private TextView titulo;
-    private TextView resTitle;
+    private Toast toast;
+
+    //variables para el método
+    private double[] a = new double[20];
+    private double[] b = new double[20];
+    private double[] c = new double[20];
+    private ArrayList<Double> raices;
+    private int n;
 
     public Bairstow(){
         //Constructor vacio requerido
@@ -32,35 +37,59 @@ public class Bairstow extends Activity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_bairstow);
-        calcular = (Button)findViewById(R.id.btnCalcularBairstow);
+        btnCalcularBairstow = (Button)findViewById(R.id.btnCalcularBairstow);
         valores = (EditText)findViewById(R.id.coeficientes);
         resultados = (TextView)findViewById(R.id.resultados);
-        calcular.setOnClickListener(new View.OnClickListener(){
+        btnCalcularBairstow.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                imprimirValor();
+                try {
+                    leerEntrada(valores.getText().toString());
+                    System.out.println("Tamaño de a: " + a.length);
+                    ArrayList<Double> arregloPrueba = new ArrayList<Double>();
+                    for(int i = 0; i<n; i++){
+                        System.out.print(a[i]+ " ");
+                        arregloPrueba.add(a[i]);
+                    }
+                    System.out.println("");
+                    arregloPrueba = bairSimple(arregloPrueba, 0.00001);
+                    raices = evaluarFuncion(arregloPrueba);
+                    System.out.println("Raíces: " + raices.toString());
+                } catch(Exception e){
+                    toast = Toast.makeText(getApplicationContext(), "Verifique los valores ingresados" ,
+                            Toast.LENGTH_LONG);
+                    toast.show();
+                }
             }
         });
     }
 
+    private void leerEntrada(String s) {
+        String[] valoresSimples = s.split(",");
+        n = valoresSimples.length;
+        for(int i = 0; i < valoresSimples.length; i++){
+            a[i] = Double.parseDouble(valoresSimples[i]);
+        }
+    }
+
     // Division sintetica doble
     public ArrayList<Double> divSinDoble(ArrayList<Double> coef, double r, double s){
-        ArrayList<Double> copia = new ArrayList<Double>(coef.size());
+        ArrayList<Double> nuevoArreglo = new ArrayList<Double>(coef.size());
         for(Double dab : coef){
-            copia.add(dab);
+            nuevoArreglo.add(dab);
         }
-        for(int i = 1; i < copia.size(); i++){
+        for(int i = 1; i < nuevoArreglo.size(); i++){
             if(i<2) {
-                System.out.print("De " + copia.get(i));
-                copia.set(i, copia.get(i) + copia.get(i - 1) * r);
-                System.out.println(" A " + copia.get(i));
+                System.out.print("De " + nuevoArreglo.get(i));
+                nuevoArreglo.set(i, nuevoArreglo.get(i) + nuevoArreglo.get(i - 1) * r);
+                System.out.println(" A " + nuevoArreglo.get(i));
             } else {
-                System.out.print("De " + copia.get(i));
-                copia.set(i,copia.get(i) + copia.get(i - 1) * r + copia.get(i - 2) * s);
-                System.out.println(" A " + copia.get(i));
+                System.out.print("De " + nuevoArreglo.get(i));
+                nuevoArreglo.set(i,nuevoArreglo.get(i) + nuevoArreglo.get(i - 1) * r + nuevoArreglo.get(i - 2) * s);
+                System.out.println(" A " + nuevoArreglo.get(i));
             }
         }
-        return copia;
+        return nuevoArreglo;
     }
 
     //Metodo de Bairstow
@@ -70,9 +99,10 @@ public class Bairstow extends Activity{
         double delta, r=-1, s=-1, deltaR, deltaS;
         int lengthB = 0,lengthC = 0;
         while(Math.sqrt(Math.abs(Math.pow(b.get(b.size()-1),2)+Math.pow(b.get(b.size()-2),2)))>prec){
-            System.out.println("coef " + coef.toString());
             j++;
-            System.out.println("Condicion " + Math.abs(b.get(b.size()-1)*b.get(b.size()-2)));
+            System.out.println("coef " + coef.toString() +" en corrida " +j);
+            System.out.println("Condicion " + Math.sqrt(Math.abs(Math.pow(b.get(b.size()-1),2)
+                    +Math.pow(b.get(b.size()-2),2))) + "fue mayor que " +prec);
             b = divSinDoble(coef, r, s);
             System.out.println("Hice b " + b.toString() +" con div y ahora c");
             c = divSinDoble(b,r,s);
@@ -80,17 +110,14 @@ public class Bairstow extends Activity{
             lengthC = c.size();
             lengthB = b.size();
             delta = Math.pow(c.get(lengthC-3),2)-c.get(lengthC-4)*c.get(lengthC-2);
-
-
             deltaR = ((c.get(lengthC-4)*b.get(lengthB-1))-(c.get(lengthC-3)*b.get(lengthB-2)))/delta;
-
             deltaS = ((b.get(lengthB-2)*c.get(lengthC-2))-(b.get(lengthB-1)*c.get(lengthC-3)))/delta;
-
             r+=deltaR;
             s+=deltaS;
             System.out.println("delta " + delta + " r "+ r + " s " + s);
         }
-        System.out.println("Condicion " + Math.sqrt(Math.abs(Math.pow(b.get(b.size()-1),2)+Math.pow(b.get(b.size()-2),2))));
+        System.out.println("Condicion " + Math.sqrt(Math.abs(Math.pow(b.get(b.size()-1),2)+
+                Math.pow(b.get(b.size()-2),2))));
         for(int i = 0; i < lengthB-2; i++){
             fin.add(b.get(i));
         }
@@ -98,23 +125,33 @@ public class Bairstow extends Activity{
         return fin;
     }
 
+    public ArrayList<Double> evaluarFuncion(ArrayList<Double> arreglo){
+        ArrayList<Double> raices = new ArrayList<Double>();
+        double a,b,c,d;
+        if(arreglo.size()==3){
+            a= arreglo.get(0);
+            b = arreglo.get(1);
+            c = arreglo.get(2);
+            d = b * b - 4 * a * c;
 
-    private void imprimirValor() {
-        String res = "";
-        ArrayList<Double> prueba = new ArrayList<Double>();
-        prueba.add(6.0);
-        prueba.add(31.0);
-        prueba.add(63.0);
-        prueba.add(60.0);
-        prueba.add(44.0);
-        prueba.add(19.0);
-        prueba.add(-13.0);
-        prueba.add(-1.0);
-        prueba = bairSimple(prueba, 0.00000001);
-        System.out.println("Lo logré con " + prueba.size());
-        for (int i = 0; i < prueba.size(); i++) {
-            res += prueba.get(i) + ", ";
+            if(d > 0){
+                System.out.println("Roots are real and unequal");
+                raices.add(( - b + Math.sqrt(d))/(2*a));
+                raices.add((-b - Math.sqrt(d))/(2*a));
+                System.out.println("First root is:"+raices.get(0));
+                System.out.println("Second root is:"+raices.get(1));
+            }
+            else if(d == 0){
+                System.out.println("Roots are real and equal");
+                raices.add((-b+Math.sqrt(d))/(2*a));
+                System.out.println("Root:"+raices.get(0));
+            }
+            else{
+                System.out.println("Roots are imaginary");
+            }
+        } else if(arreglo.size() == 2){
+            raices.add(-1*(arreglo.get(1)));
         }
-        resultados.setText(res);
+        return raices;
     }
 }
