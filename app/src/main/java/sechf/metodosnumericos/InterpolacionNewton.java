@@ -32,7 +32,7 @@ public class InterpolacionNewton extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_interpolacion_newton);
         agregarPunto = (Button) findViewById(R.id.btnAgregarPto);
         eliminarPunto = (Button) findViewById(R.id.btnEliminarPto);
