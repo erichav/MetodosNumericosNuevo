@@ -1,5 +1,6 @@
 package sechf.metodosnumericos;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 
-public class Biseccion extends AppCompatActivity {
+public class Biseccion extends Activity {
 
     private Button upButton;
     private EditText funcion;
@@ -30,6 +31,7 @@ public class Biseccion extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_biseccion);
         upButton = (Button) findViewById(R.id.btnCalcularBiseccion);
         funcion = (EditText) findViewById(R.id.funcion);

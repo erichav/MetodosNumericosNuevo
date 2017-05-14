@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sechf.metodosnumericos.InterpolacionNewton">
+    tools:context="sechf.metodosnumericos.InterpolacionNewton"
+    android:background="@drawable/fondointerpolnewton"
+    >
 
     <EditText
         android:id="@+id/ptoX"
         android:layout_width="170dp"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnAgregarPto"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnAgregarPto"
         android:layout_marginTop="74dp"
         android:ems="10"
         android:hint="X"
         android:inputType="numberSigned|numberDecimal"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/btnAgregarPto"
-        android:layout_alignStart="@+id/btnAgregarPto" />
+        android:textColor="@android:color/white" />
 
     <EditText
         android:id="@+id/ptoY"
@@ -31,57 +34,61 @@
 
     <Button
         android:id="@+id/btnAgregarPto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Agregar\npunto"
-        android:layout_below="@+id/ptoX"
+        android:layout_width="90dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp" />
+        android:layout_below="@+id/ptoX"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:text="Agregar\npunto" />
 
     <Button
         android:id="@+id/btnEliminarPto"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eliminar punto\nanterior"
-        android:layout_below="@+id/ptoX"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="50dp"
+        android:layout_alignBaseline="@+id/btnAgregarPto"
+        android:layout_alignBottom="@+id/btnAgregarPto"
+        android:layout_toEndOf="@+id/btnAgregarPto"
+        android:layout_toRightOf="@+id/btnAgregarPto"
+        android:text="Eliminar punto\nanterior" />
 
     <Button
         android:id="@+id/btnCalcularInterpol"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Calcular"
-        android:layout_above="@+id/textView"
-        android:layout_alignRight="@+id/ptoY"
-        android:layout_alignEnd="@+id/ptoY"
-        android:layout_below="@+id/ptoY" />
+        android:layout_height="50dp"
+        android:layout_below="@+id/ptoY"
+        android:layout_toEndOf="@+id/btnEliminarPto"
+        android:layout_toRightOf="@+id/btnEliminarPto"
+        android:text="Calcular" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnAgregarPto"
         android:layout_marginTop="15dp"
         android:text="Puntos"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textSize="18sp" />
+        android:textColor="@android:color/background_light"
+        android:textSize="18sp"
+        android:layout_below="@+id/btnAgregarPto"
+        android:layout_alignRight="@+id/ptoY"
+        android:layout_alignEnd="@+id/ptoY"
+        android:layout_alignLeft="@+id/btnAgregarPto"
+        android:layout_alignStart="@+id/btnAgregarPto" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textView"
         android:text="Resultado"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/background_light"
         android:textSize="18sp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignStart="@+id/textView"
+        android:layout_marginTop="27dp"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
 </RelativeLayout>

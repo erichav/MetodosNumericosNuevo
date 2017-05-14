@@ -1,5 +1,6 @@
 package sechf.metodosnumericos;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -7,7 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 
-public class Menu extends AppCompatActivity {
+public class Menu extends Activity {
     public Button btnMetodoCramer;
     public Button btnMetodoBiseccion;
     public Button btnMetodoBairstow;
@@ -19,6 +20,7 @@ public class Menu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_menu);
         metodoBairstow();
         metodoBiseccion();
@@ -30,7 +32,7 @@ public class Menu extends AppCompatActivity {
 
     private void metodoBiseccion() {
         btnMetodoBiseccion = (Button)findViewById(R.id.btnBiseccion);
-        btnMetodoNewtonInterpol.setOnClickListener(new View.OnClickListener() {
+        btnMetodoBiseccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent inti = new Intent(Menu.this, Biseccion.class);

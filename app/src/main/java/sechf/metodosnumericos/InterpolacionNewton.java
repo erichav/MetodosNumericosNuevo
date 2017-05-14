@@ -1,5 +1,6 @@
 package sechf.metodosnumericos;
 
+import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class InterpolacionNewton extends AppCompatActivity {
+public class InterpolacionNewton extends Activity {
 
     private Button agregarPunto;
     private Button eliminarPunto;
@@ -31,6 +32,7 @@ public class InterpolacionNewton extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_interpolacion_newton);
         agregarPunto = (Button) findViewById(R.id.btnAgregarPto);
         eliminarPunto = (Button) findViewById(R.id.btnEliminarPto);

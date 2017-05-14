@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sechf.metodosnumericos.Cramer">
+    tools:context="sechf.metodosnumericos.Cramer"
+    android:background="@drawable/fondocramer"
+    >
 
     <EditText
         android:id="@+id/valores"
@@ -35,8 +37,7 @@
         android:layout_height="wrap_content"
         android:text="Borrar \nvalores anteriores"
         android:layout_below="@+id/valores"
-        android:layout_toRightOf="@+id/resultados"
-        android:layout_toEndOf="@+id/resultados" />
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btnCalcularCramer"
@@ -51,27 +52,30 @@
 
     <TextView
         android:id="@+id/puntos"
-        android:layout_width="wrap_content"
-        android:layout_height="130dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:text="Valores"
+        android:layout_width="361dp"
+        android:layout_height="113dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/background_light"
         android:textSize="18sp"
-        android:layout_below="@+id/ecuacionesFaltantes" />
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="239dp"
+        android:layout_below="@+id/ecuacionesFaltantes"
+        android:layout_alignRight="@+id/btnCalcularCramer"
+        android:layout_alignEnd="@+id/btnCalcularCramer" />
 
     <TextView
         android:id="@+id/resultados"
-        android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:text="Resultados"
+        android:layout_width="359dp"
+        android:layout_height="169dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="@android:color/background_light"
         android:textSize="18sp"
-        android:layout_below="@+id/puntos"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="382dp"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="29dp" />
 
     <TextView
         android:id="@+id/ecuacionesFaltantes"
@@ -83,4 +87,24 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/btnAgregarValores"
         android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/txtValores"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valores"
+        android:textColor="@android:color/background_light"
+        android:layout_alignBottom="@+id/ecuacionesFaltantes"
+        android:layout_alignLeft="@+id/puntos"
+        android:layout_alignStart="@+id/puntos" />
+
+    <TextView
+        android:id="@+id/txtResultados"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/resultados"
+        android:text="Resultados"
+        android:textColor="@android:color/background_light"
+        android:layout_alignLeft="@+id/puntos"
+        android:layout_alignStart="@+id/puntos" />
 </RelativeLayout>

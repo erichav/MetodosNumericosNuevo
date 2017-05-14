@@ -11,14 +11,13 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class Bairstow extends Activity {
+public class Bairstow extends Activity{
 
     private Button calcular;
     private EditText valores;
     private TextView resultados;
     private ArrayList<Double> coeficientes;
     private TextView titulo;
-    private TextView instrucciones;
     private TextView resTitle;
 
     public Bairstow(){
@@ -31,11 +30,11 @@ public class Bairstow extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_bairstow);
         calcular = (Button)findViewById(R.id.btnCalcularBairstow);
         valores = (EditText)findViewById(R.id.coeficientes);
         resultados = (TextView)findViewById(R.id.resultados);
-        instrucciones = (TextView)findViewById(R.id.textoBairstow);
         calcular.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
