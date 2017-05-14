@@ -1,7 +1,6 @@
 package sechf.metodosnumericos;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 
 public class Biseccion extends Activity {
 
-    private Button upButton;
+    private Button btnCalcularBiseccion;
     private EditText funcion;
     private EditText puntoInicial;
     private EditText puntoFinal;
@@ -33,38 +32,32 @@ public class Biseccion extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         setContentView(R.layout.activity_biseccion);
-        upButton = (Button) findViewById(R.id.btnCalcularBiseccion);
+        btnCalcularBiseccion = (Button) findViewById(R.id.btnCalcularBiseccion);
         funcion = (EditText) findViewById(R.id.funcion);
         puntoInicial = (EditText) findViewById(R.id.ptoInicial);
         puntoFinal = (EditText) findViewById(R.id.ptoFinal);
         error = (EditText) findViewById(R.id.error);
         resultados = (TextView) findViewById(R.id.resultados);
-        upButton.setOnClickListener(new View.OnClickListener() {
+        btnCalcularBiseccion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.btnCalcularBiseccion:
-                        if(validar(funcion.getText().toString())) {
-                            String res = biseccionCompleta(funcion.getText().toString(), Double.parseDouble(puntoInicial.getText().toString()),
-                                    Double.parseDouble(puntoFinal.getText().toString()), Double.parseDouble(error.getText().toString()));
-                            toast = Toast.makeText(getApplicationContext(),"Raíces obtenidas", Toast.LENGTH_LONG);
-                            toast.show();
-                            resultados.setText(res);
-                        }
-                        break;
+                if(validar(funcion.getText().toString())) {
+                    String res = biseccionCompleta(funcion.getText().toString(), Double.parseDouble(puntoInicial.getText().toString()),
+                            Double.parseDouble(puntoFinal.getText().toString()), Double.parseDouble(error.getText().toString()));
+                    toast = Toast.makeText(getApplicationContext(),"Raíces obtenidas", Toast.LENGTH_LONG);
+                    toast.show();
+                    resultados.setText(res);
                 }
             }
         });
     }
 
-    private double eval(final String str) {
+    private double evaluar(final String str) {
         return new Object() {
             int pos = -1, ch;
-
             void nextChar() {
                 ch = (++pos < str.length()) ? str.charAt(pos) : -1;
             }
-
             boolean eat(int charToEat) {
                 while (ch == ' ') nextChar();
                 if (ch == charToEat) {
@@ -73,20 +66,12 @@ public class Biseccion extends Activity {
                 }
                 return false;
             }
-
             double parse() {
                 nextChar();
                 double x = parseExpression();
                 if (pos < str.length()) throw new RuntimeException("Unexpected: " + (char)ch);
                 return x;
             }
-
-            // Grammar:
-            // expression = term | expression `+` term | expression `-` term
-            // term = factor | term `*` factor | term `/` factor
-            // factor = `+` factor | `-` factor | `(` expression `)`
-            //        | number | functionName factor | factor `^` factor
-
             double parseExpression() {
                 double x = parseTerm();
                 for (;;) {
@@ -95,7 +80,6 @@ public class Biseccion extends Activity {
                     else return x;
                 }
             }
-
             double parseTerm() {
                 double x = parseFactor();
                 for (;;) {
@@ -104,11 +88,9 @@ public class Biseccion extends Activity {
                     else return x;
                 }
             }
-
             double parseFactor() {
                 if (eat('+')) return parseFactor(); // unary plus
                 if (eat('-')) return -parseFactor(); // unary minus
-
                 double x;
                 int startPos = this.pos;
                 if (eat('(')) { // parentheses
@@ -144,11 +126,11 @@ public class Biseccion extends Activity {
             try {
                 sustitucionMitad = funcion.replaceAll("x", "(" + Double.toString(mitad) + ")");
 
-                if (eval(sustitucionMitad) == 0.0)
+                if (evaluar(sustitucionMitad) == 0.0)
                     break;
 
                 sustitucionInicial = funcion.replaceAll("x", "(" + Double.toString(puntoInicial) + ")");
-                if ((eval(sustitucionMitad) * eval(sustitucionInicial)) < 0) {
+                if ((evaluar(sustitucionMitad) * evaluar(sustitucionInicial)) < 0) {
                     puntoFinal = mitad;
                 } else {
                     puntoInicial = mitad;
@@ -168,7 +150,7 @@ public class Biseccion extends Activity {
         for(double i = puntoInicial; i < puntoFinal; i+=paso){
             sustitucionInicial = funcion.replaceAll("x", "("+Double.toString(i)+")");
             sustitucionFinal = funcion.replaceAll("x", "("+Double.toString(i+paso)+")");
-            if((eval(sustitucionInicial)*eval(sustitucionFinal)) < 0 || eval(sustitucionInicial) == 0.0){
+            if((evaluar(sustitucionInicial)* evaluar(sustitucionFinal)) < 0 || evaluar(sustitucionInicial) == 0.0){
                 intervalos.add(i);
                 intervalos.add(i+paso);
             }
@@ -193,7 +175,7 @@ public class Biseccion extends Activity {
             funcion = funcion.replace("x", "(-2)");
             funcion = funcion.replace("pi", "(3.1416)");
             funcion = funcion.replace("e", "(2.71828)");
-            eval(funcion);
+            evaluar(funcion);
             return true;
         } catch(Exception e){
             toast = Toast.makeText(getApplicationContext(), "Verificar escritura de la función", Toast.LENGTH_LONG);

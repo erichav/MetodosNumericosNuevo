@@ -1,8 +1,8 @@
 package sechf.metodosnumericos;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -16,13 +16,14 @@ public class InterpolacionNewton extends Activity {
 
     private Button agregarPunto;
     private Button eliminarPunto;
-    private Button calcular;
+    private Button btnCalcularInterpol;
     private EditText puntoX;
     private EditText puntoY;
     private TextView puntos;
     private TextView resultado;
     private ArrayList<ArrayList<Double>> coordenadas;
     private Toast toast;
+    private String res;
 
     public InterpolacionNewton(){
 
@@ -36,7 +37,7 @@ public class InterpolacionNewton extends Activity {
         setContentView(R.layout.activity_interpolacion_newton);
         agregarPunto = (Button) findViewById(R.id.btnAgregarPto);
         eliminarPunto = (Button) findViewById(R.id.btnEliminarPto);
-        calcular = (Button) findViewById(R.id.btnCalcularInterpol);
+        btnCalcularInterpol = (Button) findViewById(R.id.btnCalcularInterpol);
         puntoX = (EditText) findViewById(R.id.ptoX);
         puntoY = (EditText) findViewById(R.id.ptoY);
         puntos = (TextView) findViewById(R.id.puntos);
@@ -55,13 +56,12 @@ public class InterpolacionNewton extends Activity {
                 imprimirValores();
             }
         });
-        calcular.setOnClickListener(new View.OnClickListener() {
+        btnCalcularInterpol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String res = interpolacionNewton(coordenadas);
-                toast = Toast.makeText(getApplicationContext(), "Polinomio Generado" , Toast.LENGTH_LONG);
-                toast.show();
+                res = interpolacionNewton(coordenadas);
                 resultado.setText(res);
+                resultado.setMovementMethod(new ScrollingMovementMethod());
             }
         });
         coordenadas = new ArrayList<ArrayList<Double>>();
@@ -72,7 +72,7 @@ public class InterpolacionNewton extends Activity {
         puntosXY.add(puntoX);
         puntosXY.add(puntoY);
         coordenadas.add(puntosXY);
-        toast = Toast.makeText(getApplicationContext(), "Valor agregado" , Toast.LENGTH_LONG);
+        toast = Toast.makeText(getApplicationContext(), "Se agregó el valor" , Toast.LENGTH_LONG);
         toast.show();
     }
 
@@ -83,12 +83,14 @@ public class InterpolacionNewton extends Activity {
             res += lista.get(1) + "\n";
         }
         puntos.setText(res);
+        puntos.setMovementMethod(new ScrollingMovementMethod());
+
     }
 
     private void eliminarValores(){
         if(coordenadas.size() > 0) {
             coordenadas.remove(coordenadas.size() - 1);
-            toast = Toast.makeText(getApplicationContext(), "Valor eliminado", Toast.LENGTH_LONG);
+            toast = Toast.makeText(getApplicationContext(), "Se eliminó el valor", Toast.LENGTH_LONG);
             toast.show();
         }
     }
@@ -110,37 +112,21 @@ public class InterpolacionNewton extends Activity {
     }
 
     private ArrayList<Double> multiplos(ArrayList<ArrayList<Double>> matriz){
-
         double[][] arr = new double[matriz.size()][matriz.size()+1];
-
         for(int i = 0; i < matriz.size(); i++){
             for(int j = 0; j < matriz.size(); j++){
                 arr[i][j] = matriz.get(i).get(j);
             }
         }
-
         for(int j = 2; j < matriz.size() + 1; j++){
             for(int i = j-1; i < matriz.size(); i++){
                 arr[i][j] = (arr[i][j-1]-arr[i-1][j-1])/(arr[i][0]-arr[i-(j-1)][0]);
             }
         }
-		/*
-		ArrayList<ArrayList<Double>> temp = new ArrayList<ArrayList<Double>>();
-		ArrayList<Double> lista;
-		for(int i = 0; i < matriz.size(); i++){
-			lista = new ArrayList<Double>(matriz.size()+1);
-			for(int j = 0; j < matriz.size()+1; j++){
-				lista.add(arr[i][j]);
-			}
-			temp.add(lista);
-		}*/
-
         ArrayList<Double> multiplos = new ArrayList<Double>();
-
         for(int i = 0; i < matriz.size(); i++){
             multiplos.add(arr[i][i+1]);
         }
-
         return multiplos;
     }
 
