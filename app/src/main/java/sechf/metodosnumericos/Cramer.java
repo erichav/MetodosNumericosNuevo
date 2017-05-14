@@ -1,8 +1,8 @@
 package sechf.metodosnumericos;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -23,8 +23,8 @@ public class Cramer extends Activity {
     private TextView resultados;
     private Toast toast;
     private ArrayList<ArrayList<Double>> ecuaciones;
-    private Integer numIncog = 0;
-    private Integer numCoef = 0;
+    private Integer numIncognitas = 0;
+    private Integer numCoeficientes = 0;
 
     public Cramer() {
         // Required empty public constructor
@@ -50,7 +50,7 @@ public class Cramer extends Activity {
                 try {
                     leerEntrada(valores.getText().toString());
                 } catch(Exception e){
-                    toast = Toast.makeText(getApplicationContext(), "Error en los valores ingresados" , Toast.LENGTH_LONG);
+                    toast = Toast.makeText(getApplicationContext(), "Verifique valores ingresados" , Toast.LENGTH_LONG);
                     toast.show();
                 }
                 imprimirValores();
@@ -66,15 +66,16 @@ public class Cramer extends Activity {
         calcular.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(numIncog == 0) {
-                    toast = Toast.makeText(getApplicationContext(), "Resultados calculados", Toast.LENGTH_LONG);
+                if(numIncognitas == 0) {
+                    toast = Toast.makeText(getApplicationContext(), "Cálculos hechos", Toast.LENGTH_LONG);
                     toast.show();
                     resultados.setText(metodoDeCrammer(ecuaciones));
-                }else if(numIncog < 0){
-                    toast = Toast.makeText(getApplicationContext(), "Sobran líneas de coeficientes" , Toast.LENGTH_LONG);
+                    resultados.setMovementMethod(new ScrollingMovementMethod());
+                }else if(numIncognitas < 0){
+                    toast = Toast.makeText(getApplicationContext(), "Sobran coeficientes" , Toast.LENGTH_LONG);
                     toast.show();
                 } else{
-                    toast = Toast.makeText(getApplicationContext(), "Faltan líneas de coeficientes" , Toast.LENGTH_LONG);
+                    toast = Toast.makeText(getApplicationContext(), "Faltan coeficientes" , Toast.LENGTH_LONG);
                     toast.show();
                 }
             }
@@ -87,21 +88,22 @@ public class Cramer extends Activity {
         for(int i = 0; i < valoresSimples.length; i++){
             coef.add(Double.parseDouble(valoresSimples[i]));
         }
-        toast = Toast.makeText(getApplicationContext(), "Valores agregados" , Toast.LENGTH_LONG);
+        toast = Toast.makeText(getApplicationContext(), "Se agregaron valores" , Toast.LENGTH_LONG);
         toast.show();
         if (ecuaciones.size() == 0){
-            numCoef = coef.size();
+            numCoeficientes = coef.size();
             ecuaciones.add(coef);
-            numIncog = ecuaciones.get(0).size()-2;
+            numIncognitas = ecuaciones.get(0).size()-2;
         }
-        else if(coef.size() != numCoef){
-            toast = Toast.makeText(getApplicationContext(), "Número de coeficientes erróneo" , Toast.LENGTH_LONG);
+        else if(coef.size() != numCoeficientes){
+            toast = Toast.makeText(getApplicationContext(), "Verifique el número de coeficientes" +
+                    "\nnúmero de coeficientes erróneo" , Toast.LENGTH_LONG);
             toast.show();
         } else{
             ecuaciones.add(coef);
-            numIncog--;
+            numIncognitas--;
         }
-        faltantes.setText("Ecuaciones faltantes: "+numIncog);
+        faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
     }
 
     private void imprimirValores(){
@@ -113,21 +115,21 @@ public class Cramer extends Activity {
             res += "\n";
         }
         coeficientes.setText(res);
+        coeficientes.setMovementMethod(new ScrollingMovementMethod());
     }
 
     private void eliminarValores(){
         if(ecuaciones.size() > 0) {
-            numIncog++;
+            numIncognitas++;
             ecuaciones.remove(ecuaciones.size() - 1);
-            toast = Toast.makeText(getApplicationContext(), "Valores eliminados", Toast.LENGTH_LONG);
+            toast = Toast.makeText(getApplicationContext(), "Se eliminaron valores", Toast.LENGTH_LONG);
             toast.show();
-            faltantes.setText("Ecuaciones faltantes: "+numIncog);
+            faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
         }
     }
 
     private ArrayList<ArrayList<Double>> matrizSencilla(ArrayList<ArrayList<Double>> matrizCompleta){
         ArrayList<ArrayList<Double>> matriz = new ArrayList<ArrayList<Double>>();
-
         for(ArrayList<Double> arreglo: matrizCompleta){
             ArrayList<Double> res = new ArrayList<Double>();
             for(int i = 0; i < arreglo.size()-1; i++){
@@ -135,14 +137,11 @@ public class Cramer extends Activity {
             }
             matriz.add(res);
         }
-
         return matriz;
     }
 
     private double determinante(ArrayList<ArrayList<Double>> matriz) {
-
         double[][] arr = new double[matriz.size()][matriz.size()];
-
         for(int i = 0; i < matriz.size(); i++){
             System.out.println("i= "+i);
             for(int j = 0; j < matriz.size(); j++){
@@ -150,12 +149,10 @@ public class Cramer extends Activity {
                 arr[i][j] = matriz.get(i).get(j);
             }
         }
-
-        return determinanteUtil(arr);
-
+        return detUtil(arr);
     }
 
-    private double determinanteUtil(double[][] arr) {
+    private double detUtil(double[][] arr) {
         double result = 0.0;
         if (arr.length == 1) {
             result = arr[0][0];
@@ -170,15 +167,13 @@ public class Cramer extends Activity {
 
             for (int j = 1; j < arr.length; j++) {
                 for (int k = 0; k < arr[0].length; k++) {
-
-                    if (k < i) {
+                    if (k < i)
                         temp[j - 1][k] = arr[j][k];
-                    } else if (k > i) {
+                    else if (k > i)
                         temp[j - 1][k - 1] = arr[j][k];
-                    }
                 }
             }
-            result += arr[0][i] * Math.pow(-1, (int) i) * determinanteUtil(temp);
+            result += arr[0][i] * Math.pow(-1, (int) i) * detUtil(temp);
         }
         return result;
     }
@@ -189,7 +184,7 @@ public class Cramer extends Activity {
         System.out.println("Otro");
         Double determinante = determinante(matrizSencilla);
         if(determinante == 0.0) {
-            toast = Toast.makeText(getApplicationContext(), "No se puede resolver", Toast.LENGTH_LONG);
+            toast = Toast.makeText(getApplicationContext(), "No existe solución", Toast.LENGTH_LONG);
             toast.show();
         }
         else{
@@ -209,10 +204,10 @@ public class Cramer extends Activity {
                 resultados.add(determinante(matrizSencilla)/determinante);
             }
         }
-        return imprimirCrammer(resultados);
+        return resultadoCramer(resultados);
     }
 
-    private String imprimirCrammer(ArrayList<Double> valores){
+    private String resultadoCramer(ArrayList<Double> valores){
         String res = "";
         for(Double val: valores){
             res += "X"+valores.indexOf(val)+"= "+val + "\n";
