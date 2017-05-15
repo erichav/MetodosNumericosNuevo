@@ -69,6 +69,7 @@ public class GaussJordan extends Activity{
             double[][]arr = getArray();
             System.out.println("chido");
             gaussJordan(arr);
+            dibujoMatriz = matriz.dibujaMatriz(null);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }
