@@ -43,9 +43,10 @@ public class Secante extends Activity{
                 secante(funcion, puntoInicial, puntoFinal, tolerancia);
             }
         });
+        resultados.setText(Double.toString(secante(funcion,puntoInicial,puntoFinal,tolerancia)));
     }
 
-    public void secante(EditText func, EditText iniVal, EditText finVal, EditText tol){
+    public double secante(EditText func, EditText iniVal, EditText finVal, EditText tol){
         Expression j;
         double valIni = Double.parseDouble(puntoInicial.getText().toString());
         double valFini = Double.parseDouble(puntoFinal.getText().toString());
@@ -57,7 +58,6 @@ public class Secante extends Activity{
                         .setVariable("x", valIni);
             }catch(Exception e){
                 System.out.println("Función inválida.");
-                return;
             }
 
             double c = valIni;
@@ -73,6 +73,6 @@ public class Secante extends Activity{
                 iniVal = finVal;
                 valFini = c;
         }
-            System.out.println(c);
+            return c;
     }
 }
