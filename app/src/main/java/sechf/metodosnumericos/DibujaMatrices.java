@@ -63,7 +63,7 @@ public class DibujaMatrices {
                 TextView et = new TextView(context);
                 et.setVisibility(View.VISIBLE);
                 fila.addView(et);
-                et.setText(arr.get(i).get(j).toString());
+                et.setText(arr.get(i).get(j).toString()+"    ");
             }
 
             espacioMatriz.addView(fila);

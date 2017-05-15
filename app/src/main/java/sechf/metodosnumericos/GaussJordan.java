@@ -51,16 +51,17 @@ public class GaussJordan extends Activity{
                 matriz = new Matriz(tam + 1, tam);
                 matriz.llenarVacia();
 
-                double ar[][] = {{4.0, 1.0, 4.0, 1.0},{2.0, 3.0, 4.0, 1.0 },{1.0, 2.0, 3.0, 1.0}};
+                //double ar[][] = {{4.0, 1.0, 4.0, 1.0},{2.0, 3.0, 4.0, 1.0 },{1.0, 2.0, 3.0, 1.0}};
+                double ar[][] = {{2.0, 1.0, -3.0, 5.0},{3.0, -2.0, 2.0, 6.0 },{5.0, -3.0, 1.0, 16.0}};
                 matriz.setDatos(ar);
 
                 dibujoMatriz = matriz.dibujaMatriz(this);
                 dibujoMatriz.setVisibility(View.VISIBLE);
                 ActionBar.LayoutParams param = new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
-                param.leftMargin = 320;
-                param.topMargin = 260;
+                param.leftMargin = 0;
+                param.topMargin = 600;
                 param.gravity = Gravity.CENTER;
-//                this.addContentView(dibujoMatriz, param);
+                this.addContentView(dibujoMatriz, param);
                 espacioMatriz.addView(dibujoMatriz);
                 matrizExistencia = true;
             }
@@ -72,9 +73,10 @@ public class GaussJordan extends Activity{
         try {
             double[][]arr = getArray(matriz);
             actualizaMatriz();
+            printMatrix(arr);
             dibujoMatriz = matriz.dibujaMatriz(this);
             printMatrix(arr);
-            gaussJordan(arr);
+            GaussJordan(arr);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }
@@ -93,10 +95,63 @@ public class GaussJordan extends Activity{
 
         return arr;
     }
+/*
+    private void GaussJordan(double[][] array){
+        double[][] a = array;
+        int e = 1;
+        int n = a.length;
+        for (int j = 0; j < n; j++) {
+            int p = j;
+            double max = Math.abs(a[p][0]);
+            // find pivot index p
+            for (int i = j + 1; i < n; i++) {
+                if (Math.abs(a[i][j]) > max) {
+                    p = i;
 
+                }
 
-    private void gaussJordan(double[][]arr){
-        System.out.println("Boton chido");
+            }
+
+            // interchange rows
+            if (p > j) {
+                double temp = 0;
+                for (int i = 0; i < a[1].length; i++) {
+                    // put row j value in temp
+                    temp = a[j][i];
+                    // move p into j
+                    a[j][i] = a[p][i];
+                    // put temp back into p
+                    a[p][i] = temp;
+                }
+            }
+
+            // Divide row j by A[j][j]
+            double divisor = a[j][j];
+            for ( int i = 0; i < a[j].length; i ++){
+                a[j][i] = a[j][i]/divisor;
+            }
+
+//			 Subtract
+            for (int i = 0; i < a.length; i++) {
+                if (i != j) {
+                    double multiple = a[i][j];
+                    for (int x = 0; x < a[1].length; x++) {
+                        a[i][x] = (a[i][x] - a[i][j] * a[j][x]);
+
+                    }
+                }
+            }
+
+            matriz.setDatos(a);
+            dibujoMatriz = matriz.dibujaResultado(this);
+            dibujoMatriz.setVisibility(View.VISIBLE);
+            dibujoMatriz.setY(a.length*170+(j)*a.length*80);
+            espacioMatriz.addView(dibujoMatriz);
+
+        }
+    }
+*/
+    private void GaussJordan(double[][]arr){
         int startColumn = 0;
         for (int row=0; row<arr.length; row++) {
             //if the number in the start column is 0, try to switch with another
@@ -136,6 +191,7 @@ public class GaussJordan extends Activity{
             }
             startColumn++;
 
+
             matriz.setDatos(arr);
             dibujoMatriz = matriz.dibujaResultado(this);
             dibujoMatriz.setVisibility(View.VISIBLE);
@@ -143,6 +199,9 @@ public class GaussJordan extends Activity{
             espacioMatriz.addView(dibujoMatriz);
         }
     }
+//*/
+
+
 
     public void actualizaMatriz() {
 
