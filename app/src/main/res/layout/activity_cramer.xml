@@ -24,31 +24,35 @@
 
     <Button
         android:id="@+id/btnAgregarValores"
+        style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:text="Agregar\nvalores"
         android:layout_below="@+id/valores"
-        android:text="Agregar\nvalores" />
+        android:layout_alignLeft="@+id/puntos"
+        android:layout_alignStart="@+id/puntos" />
 
     <Button
         android:id="@+id/btnBorrarValores"
+        style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_green_dark"
         android:text="Borrar \nvalores anteriores"
-        android:layout_below="@+id/valores"
+        android:layout_alignBaseline="@+id/btnAgregarValores"
+        android:layout_alignBottom="@+id/btnAgregarValores"
         android:layout_centerHorizontal="true" />
 
     <Button
         android:id="@+id/btnCalcularCramer"
+        style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@android:color/holo_orange_dark"
         android:text="Calcular"
-        android:layout_above="@+id/ecuacionesFaltantes"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="11dp"
-        android:layout_marginEnd="11dp" />
+        android:layout_alignTop="@+id/btnBorrarValores"
+        android:layout_alignRight="@+id/puntos"
+        android:layout_alignEnd="@+id/puntos" />
 
     <TextView
         android:id="@+id/puntos"
@@ -59,9 +63,9 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="11dp"
         tools:layout_editor_absoluteY="239dp"
-        android:layout_below="@+id/ecuacionesFaltantes"
-        android:layout_alignRight="@+id/btnCalcularCramer"
-        android:layout_alignEnd="@+id/btnCalcularCramer" />
+        android:layout_alignTop="@+id/btnBorrarValores"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp" />
 
     <TextView
         android:id="@+id/resultados"
@@ -72,21 +76,10 @@
         android:textSize="18sp"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="382dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="29dp" />
-
-    <TextView
-        android:id="@+id/ecuacionesFaltantes"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnAgregarValores"
-        android:textSize="20sp" />
+        android:layout_below="@+id/puntos"
+        android:layout_alignRight="@+id/puntos"
+        android:layout_alignEnd="@+id/puntos"
+        android:layout_marginTop="24dp" />
 
     <TextView
         android:id="@+id/txtValores"
@@ -94,7 +87,8 @@
         android:layout_height="wrap_content"
         android:text="Valores"
         android:textColor="@android:color/background_light"
-        android:layout_alignBottom="@+id/ecuacionesFaltantes"
+        android:layout_alignBaseline="@+id/puntos"
+        android:layout_alignBottom="@+id/puntos"
         android:layout_alignLeft="@+id/puntos"
         android:layout_alignStart="@+id/puntos" />
 
@@ -102,9 +96,9 @@
         android:id="@+id/txtResultados"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/resultados"
         android:text="Resultados"
         android:textColor="@android:color/background_light"
+        android:layout_alignTop="@+id/resultados"
         android:layout_alignLeft="@+id/puntos"
         android:layout_alignStart="@+id/puntos" />
 </RelativeLayout>

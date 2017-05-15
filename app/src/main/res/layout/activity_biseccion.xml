@@ -58,10 +58,12 @@
 
     <Button
         android:id="@+id/btnCalcularBiseccion"
-        android:layout_width="wrap_content"
+        style="@android:style/Widget.Material.Button.Colored"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/error"
         android:layout_toRightOf="@+id/error"
+        android:background="@android:color/holo_orange_dark"
         android:text="Calcular" />
 
     <TextView

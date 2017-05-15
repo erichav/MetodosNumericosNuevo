@@ -16,6 +16,9 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -26,8 +29,8 @@ public class GaussJordan extends Activity{
     private Matriz matriz;
     private TableLayout dibujoMatriz;
     private ScrollView vistaMatriz;
-    private RelativeLayout espacioMatriz;
     private boolean matrizExistencia;
+    private TextView espacioMatriz;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +42,9 @@ public class GaussJordan extends Activity{
         tamanhoCampo = (EditText) findViewById(R.id.tamMatriz);
         vistaMatriz = (ScrollView) findViewById(R.id.scroll) ;
         vistaMatriz.setVisibility(View.VISIBLE);
-        espacioMatriz =  new RelativeLayout(this);
+        espacioMatriz = (TextView) findViewById(R.id.espacioMatriz);
         espacioMatriz.setVisibility(View.VISIBLE);
-
+        espacioMatriz.setMovementMethod(new ScrollingMovementMethod());
         tam = 0;
         matrizExistencia = false;
     }
@@ -75,8 +78,7 @@ public class GaussJordan extends Activity{
                 param.topMargin = 600;
                 param.gravity = Gravity.CENTER;
                 this.addContentView(dibujoMatriz, param);
-                espacioMatriz.removeViewAt(0);
-                espacioMatriz.addView(dibujoMatriz);
+
                 //espacioMatriz.setMovementMethod(new ScrollingMovementMethod());
                 matrizExistencia = true;
             }
@@ -88,7 +90,7 @@ public class GaussJordan extends Activity{
         try {
             double[][]arr = getArray(matriz);
             actualizaMatriz();
-            dibujoMatriz = matriz.dibujaMatriz(this);
+            espacioMatriz.setText(matriz.toString());
             GaussJordan(arr, new String());
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
@@ -278,12 +280,7 @@ public class GaussJordan extends Activity{
                 break;
 
             matriz.setDatos(arr);
-            dibujoMatriz = matriz.dibujaResultado(this);
-            dibujoMatriz.setVisibility(View.VISIBLE);
-            dibujoMatriz.setY(arr.length*170+(y)*arr.length*80);
-            espacioMatriz.addView(dibujoMatriz);
-            vistaMatriz.removeAllViews();
-            vistaMatriz.addView(espacioMatriz);
+            espacioMatriz.setText(espacioMatriz.getText()+"\n" + matriz.toString());
             col++;
         }
     }

@@ -40,35 +40,38 @@
 
             <Button
                 android:id="@+id/btnConstruirMatriz"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:text="Generar MAtriz"
-                android:onClick="crearMatriz"/>
+                style="@android:style/Widget.Material.Button.Colored"
+                android:layout_width="100dp"
+                android:layout_height="match_parent"
+                android:background="@android:color/holo_red_light"
+                android:onClick="crearMatriz"
+                android:text="Generar MAtriz" />
+
+            <Button
+                android:id="@+id/button3"
+                style="@android:style/Widget.Material.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:background="@android:color/holo_green_dark"
+                android:onClick="resolver"
+                android:text="Calcular" />
 
         </TableRow>
     </TableLayout>
 
-    <ScrollView
-        android:id="@+id/scroll"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="172dp"
-        android:scrollbarAlwaysDrawHorizontalTrack="true"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
-        android:scrollbars="horizontal|vertical">
-
-    </ScrollView>
-
-    <Button
-        android:id="@+id/button3"
+    <TextView
+        android:id="@+id/espacioMatriz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="resolver"
-        android:text="Button" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="173dp"
+        android:textColor="@android:color/background_light" />
 
 </RelativeLayout>

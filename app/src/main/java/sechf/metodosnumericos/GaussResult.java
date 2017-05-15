@@ -59,16 +59,16 @@ public class GaussResult  extends Activity{
                 Matriz matriz = (Matriz) objeto;
                 y = matriz.getDimensiones()[1] * 20;
 
-                TableLayout dibujoMatriz = matriz.dibujaResultado(this);
+                //TableLayout dibujoMatriz = matriz.dibujaResultado(this);
 
-                dibujoMatriz.setVisibility(View.VISIBLE);
+               // dibujoMatriz.setVisibility(View.VISIBLE);
                 param = new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
                 param.leftMargin = 40;
                 param.topMargin = y;
                 param.gravity = Gravity.CENTER;
 
                 fila.setVisibility(View.VISIBLE);
-                fila.addView(dibujoMatriz);
+                //fila.addView(dibujoMatriz);
             } else if (objeto instanceof String) {
                 String texto = (String) objeto;
 
