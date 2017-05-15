@@ -47,9 +47,18 @@ public class Matriz {
         return matriz;
     }
 
-    public TableLayout dibujaResultado(Context context) {
-        matriz = DibujaMatrices.dibujaResMatriz(context, this);
-        return matriz;
+    public String toString(Context context) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                sb.append(datos.get(i).get(j) + "\t\t");
+            }
+
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 
     public int[] getDimensiones() {
