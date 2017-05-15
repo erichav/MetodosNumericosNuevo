@@ -7,18 +7,20 @@ import android.widget.TableRow;
 
 import java.util.ArrayList;
 
+import static sechf.metodosnumericos.DibujaMatrices.fila;
+
 /**
  * Created by Erick Chávez on 13/05/2017.
  */
 
 public class Matriz {
-    private ArrayList<ArrayList<Float>> datos;
+    private ArrayList<ArrayList<Double>> datos;
     private int ancho;
     private int alto;
 
     private TableLayout matriz;
 
-    public Matriz(int ancho, int alto, ArrayList<ArrayList<Float>> datos) {
+    public Matriz(int ancho, int alto, ArrayList<ArrayList<Double>> datos) {
         this.ancho = ancho;
         this.alto = alto;
         this.datos = datos;
@@ -34,7 +36,7 @@ public class Matriz {
         this.alto = ancho;
     }
 
-    public Matriz(ArrayList<ArrayList<Float>> datos) {
+    public Matriz(ArrayList<ArrayList<Double>> datos) {
         this.datos = datos;
         ancho = datos.get(0).size();
         alto = datos.size();
@@ -55,19 +57,34 @@ public class Matriz {
         return dimensiones;
     }
 
-    public ArrayList<ArrayList<Float>> getDatos() {
+    public ArrayList<ArrayList<Double>> getDatos() {
         return datos;
     }
 
-    public void setDatos(ArrayList<ArrayList<Float>> datos) {
+    public void setDatos(ArrayList<ArrayList<Double>> datos) {
         this.datos = datos;
+    }
+
+    public void setDatos(double[][] datos) {
+        ArrayList<ArrayList<Double>> datosArL = new ArrayList<ArrayList<Double>>();
+        ArrayList<Double> fila;
+
+        for (int i = 0; i < alto; i++) {
+            fila = new ArrayList<Double>();
+            for (int j = 0; j < ancho; j++) {
+                fila.add(datos[i][j]);
+            }
+            datosArL.add(fila);
+        }
+
+        this.datos = datosArL;
     }
 
     public void llenarMatriz(TableLayout dibujoMatriz) {
         TableRow fila;
         EditText et;
-        ArrayList<ArrayList<Float>> filas = new ArrayList<>(dibujoMatriz.getChildCount());
-        ArrayList<Float> columnas;
+        ArrayList<ArrayList<Double>> filas = new ArrayList<>(dibujoMatriz.getChildCount());
+        ArrayList<Double> columnas;
 
         for (int i = 0; i < dibujoMatriz.getChildCount(); i++) {
             fila = (TableRow) dibujoMatriz.getChildAt(i);
@@ -75,7 +92,7 @@ public class Matriz {
 
             for (int j = 0; j < fila.getChildCount(); j++) {
                 et = (EditText) fila.getChildAt(j);
-                columnas.add(Float.parseFloat(et.getText().toString()));
+                columnas.add(Double.parseDouble(et.getText().toString()));
 
             }
             filas.add(columnas);
@@ -86,12 +103,12 @@ public class Matriz {
 
     public void llenarVacia() {
         datos = new ArrayList<>();
-        ArrayList<Float> fila;
+        ArrayList<Double> fila;
 
         for (int i = 0; i < alto; i++) {
             fila = new ArrayList<>();
             for (int j = 0; j < ancho; j++) {
-                fila.add(0f);
+                fila.add(0d);
             }
             datos.add(fila);
         }
@@ -99,12 +116,12 @@ public class Matriz {
 
     public Matriz copy() {
         Matriz copia = new Matriz(ancho, alto);
-        ArrayList<ArrayList<Float>> datosCopia = new ArrayList<>(datos.size());
-        ArrayList<Float> fila;
+        ArrayList<ArrayList<Double>> datosCopia = new ArrayList<>(datos.size());
+        ArrayList<Double> fila;
 
-        for (ArrayList<Float> listas : datos) {
+        for (ArrayList<Double> listas : datos) {
             fila = new ArrayList<>(datos.get(0).size());
-            for (Float val : listas) {
+            for (Double val : listas) {
                 fila.add(val);
             }
             datosCopia.add(fila);

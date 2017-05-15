@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TableLayout;
+
+import java.util.ArrayList;
 
 public class GaussJordan extends Activity{
     private EditText tamanhoCampo;
@@ -47,6 +50,7 @@ public class GaussJordan extends Activity{
 
                 matriz = new Matriz(tam + 1, tam);
                 dibujoMatriz = matriz.dibujaMatriz(this);
+                matriz.llenarVacia();
                 dibujoMatriz.setVisibility(View.VISIBLE);
                 ActionBar.LayoutParams param = new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
                 param.leftMargin = 320;
@@ -62,18 +66,31 @@ public class GaussJordan extends Activity{
 
     public void resolver(View view) {
         try {
-            matriz.llenarMatriz(dibujoMatriz);
-            Operaciones.gauss(matriz);
-            Intent intent = new Intent(this, GaussResult.class);
-            startActivity(intent);
+            double[][]arr = getArray();
+            System.out.println("chido");
+            gaussJordan(arr);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }
     }
 
+    private double[][] getArray() {
+        int ancho = matriz.getDimensiones()[0];
+        int alto = matriz.getDimensiones()[1];
+        ArrayList<ArrayList<Double>> arrL = matriz.getDatos();
+        double[][] arr = new double[alto][ancho];
+        for (int i = 0; i<alto;i++){
+            for (int j = 0; j<ancho; j++) {
+                arr[i][j]=arrL.get(i).get(j);
+            }
+        }
+
+        return arr;
+    }
 
 
-    /*public static double[][] gaussJordan(double[][]arr){
+    private void gaussJordan(double[][]arr){
+        System.out.println("Boton chido");
         int startColumn = 0;
         for (int row=0; row<arr.length; row++) {
             //if the number in the start column is 0, try to switch with another
@@ -112,11 +129,15 @@ public class GaussJordan extends Activity{
                 }
             }
             startColumn++;
+
+            matriz.setDatos(arr);
+            dibujoMatriz = matriz.dibujaMatriz(this);
+            dibujoMatriz.setVisibility(View.VISIBLE);
+            espacioMatriz.addView(dibujoMatriz);
         }
-        return arr;
     }
 
-    public static void printMatrix(double[][]arr){
+    /*public static void printMatrix(double[][]arr){
         for (int i = 0; i < arr.length; i++) {
             System.out.print("{");
             for (int j = 0; j < arr[i].length; j++) {

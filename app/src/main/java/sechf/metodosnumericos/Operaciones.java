@@ -10,8 +10,8 @@ public class Operaciones {
     public static Matriz gauss(Matriz a) {
         Matriz matriz = a;
         Matriz mat = a;
-        float valor;
-        ArrayList<Float> valores;
+        Double valor;
+        ArrayList<Double> valores;
         String texto;
         int fila;
 
@@ -23,7 +23,7 @@ public class Operaciones {
         GaussResult.agregarMatriz(matriz.copy());
 
         // TEST
-        ArrayList<Float> temp;
+        ArrayList<Double> temp;
         int pos = 1;
         try {
             while (mat.getDatos().get(0).get(0) == 0) {
@@ -62,7 +62,7 @@ public class Operaciones {
 //        System.out.println("STEP: " + matriz.getDatos().toString());
         // ^^^ DEBUG
 
-        float pivote = 0;
+        double pivote = 0;
         for (int i = 1; i < mat.getDatos().size(); i++) {
             for (int j = i; j < mat.getDatos().size(); j++) {
                 valores = mat.getDatos().get(j);
@@ -151,8 +151,8 @@ public class Operaciones {
     public static Matriz gaussJordan(Matriz matriz) {
         Matriz salida = matriz;
         int col = 0;
-        ArrayList<ArrayList<Float>> mat = matriz.getDatos();
-        ArrayList<Float> temp;
+        ArrayList<ArrayList<Double>> mat = matriz.getDatos();
+        ArrayList<Double> temp;
 
         for (int y = 0; y < matriz.getDimensiones()[1]; y++) {
             for (int x = 0; x < matriz.getDimensiones()[1]; x++) {
@@ -163,8 +163,8 @@ public class Operaciones {
                 }
 
                 if (mat.get(y).get(col) != 1) {
-                    ArrayList<Float> valores = mat.get(y);
-                    float valor;
+                    ArrayList<Double> valores = mat.get(y);
+                    double valor;
                     for (int i = valores.size() - 1; i >= 0; i--) {
                         valor = valores.get(i) / valores.get(col);
                         valores.set(i, valor);
@@ -172,9 +172,9 @@ public class Operaciones {
                 }
 
                 if (x != col) {
-                    float valor;
-                    ArrayList<Float> valores = mat.get(y);
-                    float pivote = mat.get(x).get(col);
+                    double valor;
+                    ArrayList<Double> valores = mat.get(y);
+                    double pivote = mat.get(x).get(col);
                     for (int i = valores.size() - 1; i >= 0; i--) {
                         valor = (valores.get(i) * (-pivote) + mat.get(x).get(i));
                         mat.get(x).set(i, valor);
@@ -241,9 +241,9 @@ public class Operaciones {
         for (int y = 0; y < matriz.getDimensiones()[1]; y++) {
             for (int x = 0; x < matriz.getDimensiones()[1]; x++) {
                 if (x == y) {
-                    copia.getDatos().get(y).set(x, 1f);
+                    copia.getDatos().get(y).set(x, 1d);
                 } else {
-                    copia.getDatos().get(y).set(x, 0f);
+                    copia.getDatos().get(y).set(x, 0d);
                 }
             }
         }
@@ -252,9 +252,9 @@ public class Operaciones {
 
     public static Matriz multiplicar(Matriz m1, Matriz m2) {
         Matriz salida;
-        float valor;
-        float valor1;
-        float valor2;
+        double valor;
+        double valor1;
+        double valor2;
         if (m2.getDimensiones()[0] == 1) {
             salida = m2.copy();
             for (int y = 0; y < m1.getDimensiones()[1]; y++) {
