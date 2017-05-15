@@ -51,9 +51,14 @@ public class GaussJordan extends Activity{
                 matriz = new Matriz(tam + 1, tam);
                 matriz.llenarVacia();
 
-                //double ar[][] = {{4.0, 1.0, 4.0, 1.0},{2.0, 3.0, 4.0, 1.0 },{1.0, 2.0, 3.0, 1.0}};
-                double ar[][] = {{2.0, 1.0, -3.0, 5.0},{3.0, -2.0, 2.0, 6.0 },{5.0, -3.0, 1.0, 16.0}};
-                matriz.setDatos(ar);
+                double ar[][] = {{32.0, 10.0, 7.0, 5.0, 2, 2},
+                        {15, 40, 10, 10, 1, 1},
+                        {15, 40, 10, 10, 1, 1},
+                        {15, 40, 10, 10, 1, 1},
+                        {15, 40, 10, 10, 1, 1},
+                        {1.0, 2.0, 3.0, 1.0}};
+                //double ar[][] = {{2.0, 1.0, -3.0, 5.0},{3.0, -2.0, 2.0, 6.0 },{5.0, -3.0, 1.0, 16.0}};
+                //matriz.setDatos(ar);
 
                 dibujoMatriz = matriz.dibujaMatriz(this);
                 dibujoMatriz.setVisibility(View.VISIBLE);
@@ -73,10 +78,9 @@ public class GaussJordan extends Activity{
         try {
             double[][]arr = getArray(matriz);
             actualizaMatriz();
-            printMatrix(arr);
             dibujoMatriz = matriz.dibujaMatriz(this);
+            GaussJordan(arr, new String());
             printMatrix(arr);
-            GaussJordan(arr);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }
@@ -150,7 +154,7 @@ public class GaussJordan extends Activity{
 
         }
     }
-*/
+
     private void GaussJordan(double[][]arr){
         int startColumn = 0;
         for (int row=0; row<arr.length; row++) {
@@ -199,7 +203,80 @@ public class GaussJordan extends Activity{
             espacioMatriz.addView(dibujoMatriz);
         }
     }
-//*/
+*/
+
+    private void GaussJordan(double[][]arr, String res){
+        int col = 0;
+        boolean valido = true;
+        double[] temp;
+        int cont = 0;
+
+        int total = arr.length*arr[0].length;
+
+        for (int y = 0; y < arr.length; y++) {
+            for (int x = 0; x < arr.length; x++) {
+                while (arr[y][col] == 0) {
+                    temp = arr[y];
+                    if(y == arr.length-1 || cont == total) {
+                        valido = false;
+                        break;
+                    }
+                    arr[y] = arr[y + 1];
+                    arr[y + 1] = temp;
+                    cont ++;
+
+                }
+
+                if(!valido) {
+                    res = "No existe solución.";
+                    break;
+                }
+
+                if (arr[y][col] != 1) {
+                    double[] valores = arr[y];
+                    double valor;
+                    for (int i = valores.length - 1; i >= 0; i--) {
+                        if(valores[col] != 0) {
+                            valor = valores[i] / valores[col];
+                            valores[i] = valor;
+                        }else{
+                            valido = false;
+                            break;
+                        }
+                    }
+                    //res += Arrays.toString(valores) + "\n";
+                }
+
+                if(!valido) {
+                    res = "No existe solución.";
+                    break;
+                }
+
+
+                if (x != col) {
+                    double valor;
+                    double[] valores = arr[y];
+                    double pivote = arr[x][col];
+                    //for (int i = valores.length - 1; i >= 0; i--) {
+                    for (int i = 0; i < valores.length; i++) {
+                        valor = (valores[i] * (-pivote) + arr[x][i]);
+                        arr[x][i] =  valor;
+                    }
+                }
+            }
+
+            if(!valido)
+                break;
+
+            matriz.setDatos(arr);
+            dibujoMatriz = matriz.dibujaResultado(this);
+            dibujoMatriz.setVisibility(View.VISIBLE);
+            dibujoMatriz.setY(arr.length*170+(y)*arr.length*80);
+            espacioMatriz.addView(dibujoMatriz);
+
+            col++;
+        }
+    }
 
 
 
