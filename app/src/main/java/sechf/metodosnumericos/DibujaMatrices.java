@@ -9,6 +9,8 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 /**
  * Created by Erick Chávez on 13/05/2017.
  */
@@ -26,15 +28,17 @@ public class DibujaMatrices {
         int ancho = matriz.getDimensiones()[0];
         int alto = matriz.getDimensiones()[1];
 
+        ArrayList<ArrayList<Double>> arr= matriz.getDatos();
+
         for (int i = 0; i < alto; i++) {
             fila = new TableRow(context);
             for (int j = 0; j < ancho; j++) {
                 EditText et = new EditText(context);
                 et.setInputType(InputType.TYPE_NUMBER_FLAG_SIGNED | InputType.TYPE_CLASS_NUMBER);
                 et.setVisibility(View.VISIBLE);
-                et.setId((i + 1) * (j + 1));
+                et.setId(i*ancho + j);
                 fila.addView(et);
-                et.setText("0");
+                et.setText(arr.get(i).get(j).toString());
             }
 
             espacioMatriz.addView(fila);
@@ -51,16 +55,15 @@ public class DibujaMatrices {
         int ancho = matriz.getDimensiones()[0];
         int alto = matriz.getDimensiones()[1];
 
+        ArrayList<ArrayList<Double>> arr= matriz.getDatos();
+
         for (int i = 0; i < alto; i++) {
             fila = new TableRow(context);
             for (int j = 0; j < ancho; j++) {
-                TextView tv = new TextView(context);
-                tv.setInputType(InputType.TYPE_NULL);
-                tv.setVisibility(View.VISIBLE);
-                String salida = String.format("%.4f", matriz.getDatos().get(i).get(j));
-                tv.setText(salida + "\t\t");
-                fila.addView(tv);
-
+                TextView et = new TextView(context);
+                et.setVisibility(View.VISIBLE);
+                fila.addView(et);
+                et.setText(arr.get(i).get(j).toString());
             }
 
             espacioMatriz.addView(fila);

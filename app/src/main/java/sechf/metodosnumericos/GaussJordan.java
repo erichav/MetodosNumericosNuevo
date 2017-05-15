@@ -49,8 +49,12 @@ public class GaussJordan extends Activity{
             if (!matrizExistencia) {
 
                 matriz = new Matriz(tam + 1, tam);
-                dibujoMatriz = matriz.dibujaMatriz(this);
                 matriz.llenarVacia();
+
+                double ar[][] = {{4.0, 1.0, 4.0, 1.0},{2.0, 3.0, 4.0, 1.0 },{1.0, 2.0, 3.0, 1.0}};
+                matriz.setDatos(ar);
+
+                dibujoMatriz = matriz.dibujaMatriz(this);
                 dibujoMatriz.setVisibility(View.VISIBLE);
                 ActionBar.LayoutParams param = new ActionBar.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT);
                 param.leftMargin = 320;
@@ -66,16 +70,17 @@ public class GaussJordan extends Activity{
 
     public void resolver(View view) {
         try {
-            double[][]arr = getArray();
-            System.out.println("chido");
+            double[][]arr = getArray(matriz);
+            actualizaMatriz();
+            dibujoMatriz = matriz.dibujaMatriz(this);
+            printMatrix(arr);
             gaussJordan(arr);
-            dibujoMatriz = matriz.dibujaMatriz(null);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }
     }
 
-    private double[][] getArray() {
+    private double[][] getArray(Matriz matriz) {
         int ancho = matriz.getDimensiones()[0];
         int alto = matriz.getDimensiones()[1];
         ArrayList<ArrayList<Double>> arrL = matriz.getDatos();
@@ -132,13 +137,33 @@ public class GaussJordan extends Activity{
             startColumn++;
 
             matriz.setDatos(arr);
-            dibujoMatriz = matriz.dibujaMatriz(this);
+            dibujoMatriz = matriz.dibujaResultado(this);
             dibujoMatriz.setVisibility(View.VISIBLE);
+            dibujoMatriz.setY(arr.length*170+(row)*arr.length*80);
             espacioMatriz.addView(dibujoMatriz);
         }
     }
 
-    /*public static void printMatrix(double[][]arr){
+    public void actualizaMatriz() {
+
+        int ancho = matriz.getDimensiones()[0];
+        int alto = matriz.getDimensiones()[1];
+
+
+        EditText et;
+        double[][]arr = getArray(matriz);
+
+        for (int i = 0; i < alto; i++) {
+            for (int j = 0; j < ancho; j++) {
+                et = (EditText) findViewById(i*ancho + j);
+                arr[i][j]=Double.parseDouble(et.getText().toString());
+            }
+        }
+
+        matriz.setDatos(arr);
+    }
+
+    public void printMatrix(double[][]arr){
         for (int i = 0; i < arr.length; i++) {
             System.out.print("{");
             for (int j = 0; j < arr[i].length; j++) {
@@ -146,5 +171,5 @@ public class GaussJordan extends Activity{
             }
             System.out.println("}");
         }
-    }*/
+    }
 }
