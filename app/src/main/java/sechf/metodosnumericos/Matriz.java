@@ -47,12 +47,13 @@ public class Matriz {
         return matriz;
     }
 
+
     public String toString(Context context) {
         StringBuilder sb = new StringBuilder();
 
         for (int i = 0; i < alto; i++) {
             for (int j = 0; j < ancho; j++) {
-                sb.append(datos.get(i).get(j) + "\t\t");
+                sb.append(String.format("%.4f", datos.get(i).get(j)) + "\t\t");
             }
 
             sb.append("\n");
