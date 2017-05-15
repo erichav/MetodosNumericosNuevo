@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class GaussJordan extends Activity{
 
     private Matriz matriz;
     private TableLayout dibujoMatriz;
+    private ScrollView vistaMatriz;
     private RelativeLayout espacioMatriz;
     private boolean matrizExistencia;
 
@@ -34,7 +37,9 @@ public class GaussJordan extends Activity{
         setContentView(R.layout.activity_gauss_jordan);
         dibujoMatriz = new TableLayout(this);
         tamanhoCampo = (EditText) findViewById(R.id.tamMatriz);
-        espacioMatriz = (RelativeLayout) findViewById(R.id.generaMatriz);
+        vistaMatriz = (ScrollView) findViewById(R.id.scroll) ;
+        //espacioMatriz = (RelativeLayout) vistaMatriz.getChildAt(0);
+
         tam = 0;
         matrizExistencia = false;
     }
@@ -53,10 +58,11 @@ public class GaussJordan extends Activity{
 
                 double ar[][] = {{32.0, 10.0, 7.0, 5.0, 2, 2},
                         {15, 40, 10, 10, 1, 1},
-                        {15, 40, 10, 10, 1, 1},
-                        {15, 40, 10, 10, 1, 1},
-                        {15, 40, 10, 10, 1, 1},
-                        {1.0, 2.0, 3.0, 1.0}};
+                        {3, 20, 65, -5, 6, 2},
+                        {5, 10, 15, 50, 5, 1},
+                        {3, 5, 10, 4, 40, 2}};
+                //double ar[][] = {{2.0, 1.0, -3.0, 5.0},{3.0, -2.0, 2.0, 6.0 },{5.0, -3.0, 1.0, 16.0}};
+                matriz.setDatos(ar);
                 //double ar[][] = {{2.0, 1.0, -3.0, 5.0},{3.0, -2.0, 2.0, 6.0 },{5.0, -3.0, 1.0, 16.0}};
                 //matriz.setDatos(ar);
 
@@ -67,7 +73,9 @@ public class GaussJordan extends Activity{
                 param.topMargin = 600;
                 param.gravity = Gravity.CENTER;
                 this.addContentView(dibujoMatriz, param);
+                espacioMatriz.removeViewAt(0);
                 espacioMatriz.addView(dibujoMatriz);
+                //espacioMatriz.setMovementMethod(new ScrollingMovementMethod());
                 matrizExistencia = true;
             }
         } catch (Exception e) {
@@ -79,8 +87,10 @@ public class GaussJordan extends Activity{
             double[][]arr = getArray(matriz);
             actualizaMatriz();
             dibujoMatriz = matriz.dibujaMatriz(this);
+            printMatrix(arr);
             GaussJordan(arr, new String());
             printMatrix(arr);
+            vistaMatriz.addView(dibujoMatriz);
         } catch (NullPointerException e) {
             System.out.println("No hay matriz para resolver.");
         }

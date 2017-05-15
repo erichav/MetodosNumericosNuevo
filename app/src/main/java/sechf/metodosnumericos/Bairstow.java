@@ -46,15 +46,32 @@ public class Bairstow extends Activity{
                 try {
                     leerEntrada(valores.getText().toString());
                     System.out.println("Tamaño de a: " + a.length);
-                    ArrayList<Double> arregloPrueba = new ArrayList<Double>();
+                    ArrayList<Double> prueba = new ArrayList<Double>();
                     for(int i = 0; i<n; i++){
                         System.out.print(a[i]+ " ");
-                        arregloPrueba.add(a[i]);
+                        prueba.add(a[i]);
                     }
                     System.out.println("");
-                    arregloPrueba = bairSimple(arregloPrueba, 0.00001);
-                    raices = evaluarFuncion(arregloPrueba);
+                    while(prueba.size()>3) {
+                        prueba = bairSimple(prueba, 0.00001);
+                    }
+                    raices = evaluarFuncion(prueba);
                     System.out.println("Raíces: " + raices.toString());
+                    String res = "";
+                    if(raices.size()>0) {
+                        for(int i = 0; i < raices.size(); i++){
+                            raices.set(i, Math.floor(raices.get(i) * 1e5) / 1e5);
+                        }
+                        res = raices.get(0).toString();
+                        if(raices.size()>1){
+                            for (int i = 1; i < raices.size(); i++) {
+                                res += ", " + raices.get(i).toString();
+                            }
+                        }
+                    }else{
+                        res += "Raíces imaginarias :(";
+                    }
+                    resultados.setText(res);
                 } catch(Exception e){
                     toast = Toast.makeText(getApplicationContext(), "Verifique los valores ingresados" ,
                             Toast.LENGTH_LONG);

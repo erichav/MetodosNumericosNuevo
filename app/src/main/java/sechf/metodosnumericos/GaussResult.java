@@ -38,8 +38,8 @@ public class GaussResult  extends Activity{
     }
 
     private void reset() {
-        RelativeLayout fondo = (RelativeLayout)findViewById(R.id.generaMatriz);
-        fondo.clearDisappearingChildren();
+        //RelativeLayout fondo = (RelativeLayout)findViewById(R.id.generaMatriz);
+        //fondo.clearDisappearingChildren();
         resetSteps();
     }
 
@@ -48,7 +48,7 @@ public class GaussResult  extends Activity{
     }
 
     private void dibujar(ArrayList<Object> objetos) {
-        RelativeLayout fondo = (RelativeLayout) findViewById(R.id.generaMatriz);
+        //RelativeLayout fondo = (RelativeLayout) findViewById(R.id.generaMatriz);
         ActionBar.LayoutParams param;
         TableLayout tabla = new TableLayout(this);
         TableRow fila;
@@ -93,7 +93,7 @@ public class GaussResult  extends Activity{
             fila.addView(espacio);
             tabla.addView(fila);
         }
-        fondo.addView(tabla);
+        //fondo.addView(tabla);
     }
 
     public static void agregarMatriz(Matriz m) {

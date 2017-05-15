@@ -19,7 +19,7 @@ public class Cramer extends Activity {
     private Button calcular;
     private EditText valores;
     private TextView coeficientes;
-    private TextView faltantes;
+    //private TextView faltantes;
     private TextView resultados;
     private Toast toast;
     private ArrayList<ArrayList<Double>> ecuaciones;
@@ -41,7 +41,7 @@ public class Cramer extends Activity {
         borrar = (Button) findViewById(R.id.btnBorrarValores);
         calcular = (Button) findViewById(R.id.btnCalcularCramer);
         valores = (EditText) findViewById(R.id.valores);
-        faltantes = (TextView) findViewById(R.id.ecuacionesFaltantes);
+        //faltantes = (TextView) findViewById(R.id.ecuacionesFaltantes);
         coeficientes = (TextView) findViewById(R.id.puntos);
         resultados = (TextView) findViewById(R.id.resultados);
         agregar.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,7 @@ public class Cramer extends Activity {
 
     private void leerEntrada(String valores) throws Exception{
         ArrayList<Double> coef = new ArrayList<Double>();
-        String[] valoresSimples = valores.split(",");
+        String[] valoresSimples = valores.split(" ");
         for(int i = 0; i < valoresSimples.length; i++){
             coef.add(Double.parseDouble(valoresSimples[i]));
         }
@@ -103,7 +103,7 @@ public class Cramer extends Activity {
             ecuaciones.add(coef);
             numIncognitas--;
         }
-        faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
+        //faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
     }
 
     private void imprimirValores(){
@@ -124,7 +124,7 @@ public class Cramer extends Activity {
             ecuaciones.remove(ecuaciones.size() - 1);
             toast = Toast.makeText(getApplicationContext(), "Se eliminaron valores", Toast.LENGTH_LONG);
             toast.show();
-            faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
+            //faltantes.setText("Ecuaciones faltantes: "+ numIncognitas);
         }
     }
 

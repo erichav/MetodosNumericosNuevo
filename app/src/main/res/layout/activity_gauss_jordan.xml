@@ -14,7 +14,8 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:baselineAligned="false">
+        android:baselineAligned="false"
+        android:stretchColumns="*">
 
         <TableRow
             android:layout_width="match_parent"
@@ -43,19 +44,20 @@
                 android:layout_height="wrap_content"
                 android:text="Generar MAtriz"
                 android:onClick="crearMatriz"/>
+
         </TableRow>
     </TableLayout>
 
-    <RelativeLayout
-        android:id="@+id/generaMatriz"
+    <ScrollView
+        android:id="@+id/scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="168dp">
+        android:layout_marginTop="172dp">
 
-    </RelativeLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/button3"
